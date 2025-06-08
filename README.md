@@ -1,77 +1,77 @@
-# LP Analyzer - アフィリエイトLP自動分析ツール
+# LP Analyzer - Automated Affiliate Landing Page Analysis Tool
 
-ASPで取り扱う案件のランディングページを自動分析し、アフィリエイト記事作成に必要な情報を迅速かつ効率的に抽出・提示するPythonツールです。
+A Python tool that automatically analyzes landing pages for affiliate marketing campaigns, extracting essential information for content creation quickly and efficiently.
 
-## 機能概要
+## Features Overview
 
-### 🎯 主要機能
-- **URLリスト管理**: CSVファイルからURL一括インポート、進捗管理
-- **コンテンツ抽出**: Playwrightによる最終レンダリングHTML取得
-- **AI分析**: OpenAI APIを使用した高度な分析
-- **レポート生成**: Markdownレポートと統合サマリの自動生成
-- **エラー管理**: 詳細ログとリトライ機能
+### 🎯 Core Features
+- **URL List Management**: Bulk import from CSV files with progress tracking
+- **Content Extraction**: Final rendered HTML extraction using Playwright
+- **AI Analysis**: Advanced analysis powered by OpenAI API
+- **Report Generation**: Automated Markdown reports and integrated summaries
+- **Error Management**: Detailed logging and retry functionality
 
-### 📊 分析内容
-1. **ペルソナ仮説生成** - ターゲット顧客層の特定
-2. **USP・競合優位性抽出** - 独自の強みと差別化ポイント
-3. **ベネフィット分析** - 機能的・感情的ベネフィットの抽出
-4. **コピーライティング手法** - AIDA、PAS、BEAFなどの手法分析
-5. **記事構成テンプレート** - アフィリエイト記事作成の指針
+### 📊 Analysis Components
+1. **Persona Hypothesis Generation** - Target customer identification
+2. **USP & Competitive Advantage Extraction** - Unique strengths and differentiators
+3. **Benefit Analysis** - Functional and emotional benefit extraction
+4. **Copywriting Technique Analysis** - AIDA, PAS, BEAF framework detection
+5. **Article Structure Templates** - Guidelines for affiliate content creation
 
-## セットアップ
+## Setup
 
-### 1. 環境要件
-- Python 3.8以上
-- OpenAI APIキー
+### 1. Requirements
+- Python 3.8 or higher
+- OpenAI API Key
 
-### 2. インストール
+### 2. Installation
 ```bash
-# リポジトリクローン
+# Clone repository
 git clone <repository-url>
 cd affiliate-lp-analyzer
 
-# セットアップスクリプト実行
+# Run setup script
 python setup.py
 ```
 
-### 3. 環境変数設定
-`.env`ファイルを編集してOpenAI APIキーを設定：
+### 3. Environment Configuration
+Edit the `.env` file to configure your OpenAI API key:
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
 ```
 
-## 使用方法
+## Usage
 
-### 単一URL分析
+### Single URL Analysis
 ```bash
 python main.py analyze https://example.com/landing-page
 ```
 
-### CSVファイルから一括分析
+### Batch Analysis from CSV
 ```bash
-# 順次実行
+# Sequential execution
 python main.py batch data/input/urls.csv
 
-# 並列実行
+# Parallel execution
 python main.py batch data/input/urls.csv --batch
 
-# 中断後の再開
+# Resume after interruption
 python main.py batch data/input/urls.csv --resume
 ```
 
-### 進捗確認
+### Progress Check
 ```bash
 python main.py status
 ```
 
-### エラー状態のリセット
+### Reset Error States
 ```bash
 python main.py reset --reset-errors
 ```
 
-## CSVファイル形式
+## CSV File Format
 
-URLリストのCSVファイルは以下の形式で作成してください：
+Create your URL list CSV file in the following format:
 
 ```csv
 url,priority,category
@@ -80,116 +80,225 @@ https://example.com/lp2,medium,finance
 https://example.com/lp3,low,education
 ```
 
-必須列：
-- `url`: 分析対象のURL
+Required columns:
+- `url`: Target URL for analysis
 
-オプション列：
-- `priority`: 優先度（high/medium/low）
-- `category`: カテゴリ（任意のテキスト）
+Optional columns:
+- `priority`: Priority level (high/medium/low)
+- `category`: Category classification (any text)
 
-## 出力ファイル
+## Output Files
 
-### 個別レポート（Markdown）
-各URLごとに以下の内容を含むレポートを生成：
-- ページ概要（タイトル、メタディスクリプション、基本指標）
-- ペルソナ分析（年齢層、職業、課題など）
-- USP・競合優位性分析
-- ベネフィット分析（機能的・感情的ベネフィット）
-- コピーライティング手法分析
-- アフィリエイト記事作成のポイント
+### Individual Reports (Markdown)
+Generate comprehensive reports for each URL including:
+- Page overview (title, meta description, key metrics)
+- Persona analysis (demographics, occupation, challenges)
+- USP & competitive advantage analysis
+- Benefit analysis (functional & emotional benefits)
+- Copywriting technique analysis
+- Affiliate content creation guidelines
 
-### 統合サマリレポート
-複数URL分析時に以下を含む統合レポートを生成：
-- 分析概要と統計
-- 共通ペルソナ・USP・キーワード傾向
-- 業界別インサイト
-- アフィリエイト戦略提案
+### Integrated Summary Report
+For multi-URL analysis, generates integrated reports containing:
+- Analysis overview and statistics
+- Common persona, USP, and keyword trends
+- Industry-specific insights
+- Affiliate strategy recommendations
 
-### JSONデータ
-構造化された分析データをJSON形式で出力
+### JSON Data
+Structured analysis data output in JSON format
 
-## ディレクトリ構造
+## Directory Structure
 
 ```
 affiliate-lp-analyzer/
 ├── src/
-│   ├── core/           # ジョブキュー・進捗管理
-│   ├── extractors/     # Webコンテンツ抽出
-│   ├── analyzers/      # AI分析エンジン
-│   ├── exporters/      # レポート生成
-│   └── utils/          # OpenAI API・ログ管理
+│   ├── core/           # Job queue & progress management
+│   ├── extractors/     # Web content extraction
+│   ├── analyzers/      # AI analysis engine
+│   ├── exporters/      # Report generation
+│   └── utils/          # OpenAI API & logging
 ├── data/
-│   ├── input/          # 入力CSVファイル
-│   ├── output/         # 出力レポート
-│   └── temp/           # 一時ファイル・進捗データ
-├── logs/               # ログファイル
-├── templates/          # プロンプトテンプレート
-├── config/             # 設定ファイル
-├── main.py             # メインCLI
-├── setup.py            # セットアップスクリプト
-└── requirements.txt    # 依存パッケージ
+│   ├── input/          # Input CSV files
+│   ├── output/         # Output reports
+│   └── temp/           # Temporary files & progress data
+├── logs/               # Log files
+├── templates/          # Prompt templates
+├── config/             # Configuration files
+├── main.py             # Main CLI interface
+├── setup.py            # Setup script
+└── requirements.txt    # Dependencies
 ```
 
-## 設定オプション
+## Configuration Options
 
-### デフォルト設定（.env）
+### Default Settings (.env)
 ```env
-# OpenAI API設定
+# OpenAI API Configuration
 OPENAI_API_KEY=your_api_key
 DEFAULT_MODEL=gpt-4o-mini
 MAX_TOKENS=4000
 TEMPERATURE=0.3
 
-# レート制限
+# Rate Limiting
 REQUESTS_PER_MINUTE=60
 MAX_CONCURRENT_REQUESTS=5
 
-# ブラウザ設定
+# Browser Settings
 BROWSER_TIMEOUT=30000
 WAIT_FOR_SELECTOR_TIMEOUT=10000
 ```
 
-## コスト管理
+## Cost Management
 
-- デフォルトモデル：GPT-4o-mini（コスト効率重視）
-- 1URLあたりの概算コスト：$0.01-0.05
-- レート制限対応でAPI制限を回避
-- 詳細なコスト追跡とレポート出力
+- Default model: GPT-4o-mini (cost-optimized)
+- Estimated cost per URL: $0.01-0.05
+- Rate limiting to avoid API restrictions
+- Detailed cost tracking and reporting
 
-## トラブルシューティング
+## Troubleshooting
 
-### よくある問題
+### Common Issues
 
-1. **Playwrightブラウザが見つからない**
+1. **Playwright browser not found**
    ```bash
    python -m playwright install
    ```
 
-2. **OpenAI API制限エラー**
-   - `.env`ファイルでレート制限設定を調整
-   - 並列実行数を減らす（`--max-concurrent`オプション）
+2. **OpenAI API rate limit errors**
+   - Adjust rate limiting settings in `.env` file
+   - Reduce concurrent execution (`--max-concurrent` option)
 
-3. **メモリ不足**
-   - 大量のURL処理時は`--batch`オプションを避ける
-   - 処理を分割して実行
+3. **Memory issues**
+   - Avoid `--batch` option for large URL sets
+   - Split processing into smaller chunks
 
-### ログファイル
-- メインログ：`logs/lp_analyzer_YYYYMMDD.log`
-- エラーログ：`logs/lp_analyzer_errors_YYYYMMDD.log`
-- JSONログ：`logs/lp_analyzer_YYYYMMDD.json`
+### Log Files
+- Main log: `logs/lp_analyzer_YYYYMMDD.log`
+- Error log: `logs/lp_analyzer_errors_YYYYMMDD.log`
+- JSON log: `logs/lp_analyzer_YYYYMMDD.json`
 
-## 開発・拡張
+## Development & Extension
 
-### カスタムプロンプト
-`templates/`ディレクトリにJSONファイルを追加することで、独自の分析プロンプトを作成できます。
+### Custom Prompts
+Add JSON files to the `templates/` directory to create custom analysis prompts.
 
-### API拡張
-OpenAI以外のAIサービス対応やカスタム分析ロジックの追加が可能です。
+### API Extensions
+Support for additional AI services and custom analysis logic can be easily integrated.
 
-## ライセンス
+## Command Reference
 
-このプロジェクトはMITライセンスの下で公開されています。
+### Main Commands
+```bash
+# Analyze single URL
+python main.py analyze <URL> [--output OUTPUT] [--format FORMAT]
 
-## サポート
+# Batch process URLs from CSV
+python main.py batch <CSV_FILE> [--batch] [--max-concurrent N] [--resume]
 
-問題や要望がございましたら、GitHubのIssuesページまでお報告ください。
+# Check current progress
+python main.py status
+
+# Reset job states
+python main.py reset [--reset-errors]
+```
+
+### Options
+- `--output, -o`: Specify output filename
+- `--format, -f`: Output format (markdown/json/both)
+- `--batch, -b`: Enable parallel execution
+- `--max-concurrent, -c`: Maximum concurrent processes
+- `--resume, -r`: Resume interrupted processing
+- `--verbose, -v`: Enable verbose logging
+- `--log-level`: Set log level (DEBUG/INFO/WARNING/ERROR)
+
+## API Integration
+
+### OpenAI Models Supported
+- GPT-4o-mini (default, cost-optimized)
+- GPT-4o (higher quality, higher cost)
+- GPT-3.5-turbo (legacy support)
+
+### Rate Limiting Features
+- Automatic request throttling
+- Token usage tracking
+- Exponential backoff retry logic
+- Cost estimation and reporting
+
+## Analysis Templates
+
+The system includes pre-built analysis templates for:
+
+1. **Persona Analysis**
+   - Demographics and psychographics
+   - Pain points and motivations
+   - Information consumption behavior
+
+2. **USP Extraction**
+   - Unique value propositions
+   - Competitive differentiators
+   - Supporting evidence
+
+3. **Benefit Analysis**
+   - Functional vs emotional benefits
+   - Power words and key phrases
+   - Urgency and scarcity elements
+
+4. **Copywriting Analysis**
+   - Framework detection (AIDA, PAS, BEAF)
+   - Social proof elements
+   - Authority and credibility signals
+
+## Performance Optimization
+
+### Processing Speed
+- Concurrent URL processing
+- Intelligent content chunking
+- Efficient DOM parsing
+- Progress persistence for large batches
+
+### Resource Management
+- Memory-efficient content extraction
+- API rate limiting compliance
+- Automatic error recovery
+- Detailed performance metrics
+
+## Data Privacy & Security
+
+- No personal data storage
+- Secure API key handling
+- Local processing (no data sent to third parties except OpenAI)
+- Configurable data retention policies
+
+## Contributing
+
+We welcome contributions! Please see our contributing guidelines for:
+- Code style requirements
+- Testing procedures
+- Documentation standards
+- Issue reporting
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For issues, feature requests, or questions:
+- Create an issue on GitHub
+- Check existing documentation
+- Review troubleshooting guide
+
+## Changelog
+
+### Version 1.0.0
+- Initial release
+- Full LP analysis pipeline
+- CLI interface
+- Markdown report generation
+- Error handling and logging
+- Progress tracking and resume functionality
+
+---
+
+**Note**: This tool is designed for legitimate affiliate marketing research and content creation. Please ensure compliance with website terms of service and applicable laws when analyzing third-party landing pages.
