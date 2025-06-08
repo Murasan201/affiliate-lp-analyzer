@@ -42,12 +42,30 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ## Usage
 
-### Single URL Analysis
+### 🎮 Option 1: Jupyter Notebook (Recommended for Beginners)
+
+**Perfect for non-technical users!** No Python installation required.
+
+1. **Google Colab**: Open `LP_Analyzer_Notebook.ipynb` directly in Google Colab
+2. **Local Jupyter**: Run `jupyter notebook LP_Analyzer_Notebook.ipynb`
+
+**Features:**
+- 🖱️ **Point & Click Interface**: No command line needed
+- 📝 **Copy & Paste URLs**: Simple text area input
+- 📊 **Rich Visual Output**: Beautiful HTML reports
+- 📁 **One-Click Download**: Instant Markdown report download
+- 🇯🇵 **Japanese Interface**: Beginner-friendly explanations
+
+### 🖥️ Option 2: Command Line Interface (For Developers)
+
+**For technical users who prefer CLI:**
+
+#### Single URL Analysis
 ```bash
 python main.py analyze https://example.com/landing-page
 ```
 
-### Batch Analysis from CSV
+#### Batch Analysis from CSV
 ```bash
 # Sequential execution
 python main.py batch data/input/urls.csv
