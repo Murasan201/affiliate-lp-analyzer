@@ -26,7 +26,7 @@ class PromptTemplate:
     system_prompt: str
     user_prompt_template: str
     description: str = ""
-    model: str = "gpt-4o-mini"
+    model: str = "o4-mini"
     temperature: float = 0.3
     max_tokens: int = 4000
 
@@ -222,7 +222,7 @@ class PromptManager:
 6. 購買決定要因
 
 分析結果は具体的で実用的な内容で回答してください。""",
-                "model": "gpt-4o-mini",
+                "model": "o4-mini",
                 "temperature": 0.3,
                 "max_tokens": 4000
             },
@@ -247,7 +247,7 @@ CTA要素: {cta_elements}
 5. 強みを支える具体的な特徴
 
 実用的で説得力のある分析結果を提供してください。""",
-                "model": "gpt-4o-mini",
+                "model": "o4-mini",
                 "temperature": 0.3,
                 "max_tokens": 4000
             },
@@ -272,7 +272,7 @@ CTA要素: {cta_elements}
 6. 信頼性を高める要素
 
 アフィリエイト記事作成に活用できる実用的な分析結果を提供してください。""",
-                "model": "gpt-4o-mini",
+                "model": "o4-mini",
                 "temperature": 0.3,
                 "max_tokens": 4000
             },
@@ -299,7 +299,7 @@ CTA要素: {cta_elements}
 7. ストーリーテリング
 
 具体的にどの部分でどの手法が使われているかを詳しく分析してください。""",
-                "model": "gpt-4o-mini",
+                "model": "o4-mini",
                 "temperature": 0.3,
                 "max_tokens": 4000
             }
@@ -327,7 +327,7 @@ class OpenAIClient:
                  api_key: Optional[str] = None,
                  requests_per_minute: int = 60,
                  tokens_per_minute: int = 200000,
-                 default_model: str = "gpt-4o-mini"):
+                 default_model: str = "o4-mini"):
         
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         if not self.api_key:
@@ -341,9 +341,7 @@ class OpenAIClient:
         
         # コスト計算用の価格表（2024年6月時点）
         self.pricing = {
-            "gpt-4o-mini": {"input": 0.00015, "output": 0.0006},  # per 1K tokens
-            "gpt-4o": {"input": 0.005, "output": 0.015},
-            "gpt-3.5-turbo": {"input": 0.0005, "output": 0.0015}
+            "o4-mini": {"input": 0.00015, "output": 0.0006}  # per 1K tokens
         }
     
     async def initialize(self):

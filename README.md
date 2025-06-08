@@ -136,7 +136,7 @@ affiliate-lp-analyzer/
 ```env
 # OpenAI API Configuration
 OPENAI_API_KEY=your_api_key
-DEFAULT_MODEL=gpt-4o-mini
+DEFAULT_MODEL=o4-mini
 MAX_TOKENS=4000
 TEMPERATURE=0.3
 
@@ -151,7 +151,7 @@ WAIT_FOR_SELECTOR_TIMEOUT=10000
 
 ## Cost Management
 
-- Default model: GPT-4o-mini (cost-optimized)
+- Default model: o4-mini (OpenAI o1 reasoning model, cost-optimized)
 - Estimated cost per URL: $0.01-0.05
 - Rate limiting to avoid API restrictions
 - Detailed cost tracking and reporting
@@ -215,9 +215,7 @@ python main.py reset [--reset-errors]
 ## API Integration
 
 ### OpenAI Models Supported
-- GPT-4o-mini (default, cost-optimized)
-- GPT-4o (higher quality, higher cost)
-- GPT-3.5-turbo (legacy support)
+- o4-mini (default, OpenAI o1 reasoning model, cost-optimized)
 
 ### Rate Limiting Features
 - Automatic request throttling

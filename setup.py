@@ -28,7 +28,7 @@ def create_env_file():
 OPENAI_API_KEY=your_openai_api_key_here
 
 # Default settings
-DEFAULT_MODEL=gpt-4-mini
+DEFAULT_MODEL=o4-mini
 MAX_TOKENS=4000
 TEMPERATURE=0.3
 
