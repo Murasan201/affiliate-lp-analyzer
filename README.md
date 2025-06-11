@@ -50,11 +50,23 @@ OPENAI_API_KEY=your_openai_api_key_here
 2. **Local Jupyter**: Run `jupyter notebook LP_Analyzer_Notebook.ipynb`
 
 **Features:**
-- 🖱️ **Point & Click Interface**: No command line needed
-- 📝 **Copy & Paste URLs**: Simple text area input
+- 🔧 **Simple Setup**: Pre-define URLs in code cells
+- 🔑 **Secure API Key Management**: Google Colab Secrets integration
 - 📊 **Rich Visual Output**: Beautiful HTML reports
 - 📁 **One-Click Download**: Instant Markdown report download
 - 🇯🇵 **Japanese Interface**: Beginner-friendly explanations
+
+**Setup Steps:**
+1. **Install Dependencies**: Run setup cells to install required packages
+2. **Configure URLs**: Edit the `ANALYSIS_URLS` list in the URL configuration cell
+3. **Set API Key**: Use Google Colab Secrets (🔑 icon in sidebar) to set `OPENAI_API_KEY`
+4. **Run Analysis**: Execute the analysis cell to process all URLs
+
+**Google Colab Secrets Setup:**
+- Click the 🔑 icon in the left sidebar
+- Add new secret with name: `OPENAI_API_KEY`
+- Set value to your OpenAI API key (starts with `sk-`)
+- Enable notebook access
 
 ### 🖥️ Option 2: Command Line Interface (For Developers)
 
@@ -155,8 +167,7 @@ affiliate-lp-analyzer/
 # OpenAI API Configuration
 OPENAI_API_KEY=your_api_key
 DEFAULT_MODEL=o4-mini
-MAX_TOKENS=4000
-TEMPERATURE=0.3
+MAX_COMPLETION_TOKENS=4000
 
 # Rate Limiting
 REQUESTS_PER_MINUTE=60
@@ -306,6 +317,13 @@ For issues, feature requests, or questions:
 - Review troubleshooting guide
 
 ## Changelog
+
+### Version 1.1.0
+- **OpenAI o4-mini Model Support**: Full compatibility with o4-mini reasoning model
+- **Improved Jupyter Notebook Interface**: Pre-defined URL configuration for better usability
+- **Enhanced Security**: Google Colab Secrets integration for API key management
+- **API Parameter Updates**: Updated to use `max_completion_tokens` instead of `max_tokens`
+- **UI Simplification**: Removed ipywidgets dependency issues, improved non-technical user experience
 
 ### Version 1.0.0
 - Initial release
