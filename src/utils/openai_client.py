@@ -27,8 +27,7 @@ class PromptTemplate:
     user_prompt_template: str
     description: str = ""
     model: str = "o4-mini"
-    temperature: float = 0.3
-    max_tokens: int = 4000
+    max_completion_tokens: int = 4000
 
 
 @dataclass
@@ -223,8 +222,7 @@ class PromptManager:
 
 分析結果は具体的で実用的な内容で回答してください。""",
                 "model": "o4-mini",
-                "temperature": 0.3,
-                "max_tokens": 4000
+                "max_completion_tokens": 4000
             },
             {
                 "name": "usp_analysis",
@@ -248,8 +246,7 @@ CTA要素: {cta_elements}
 
 実用的で説得力のある分析結果を提供してください。""",
                 "model": "o4-mini",
-                "temperature": 0.3,
-                "max_tokens": 4000
+                "max_completion_tokens": 4000
             },
             {
                 "name": "benefit_analysis",
@@ -273,8 +270,7 @@ CTA要素: {cta_elements}
 
 アフィリエイト記事作成に活用できる実用的な分析結果を提供してください。""",
                 "model": "o4-mini",
-                "temperature": 0.3,
-                "max_tokens": 4000
+                "max_completion_tokens": 4000
             },
             {
                 "name": "copywriting_analysis",
@@ -300,8 +296,7 @@ CTA要素: {cta_elements}
 
 具体的にどの部分でどの手法が使われているかを詳しく分析してください。""",
                 "model": "o4-mini",
-                "temperature": 0.3,
-                "max_tokens": 4000
+                "max_completion_tokens": 4000
             }
         ]
         
@@ -354,8 +349,8 @@ class OpenAIClient:
         retry=retry_if_exception_type((openai.RateLimitError, openai.APITimeoutError))
     )
     async def _make_api_call(self, messages: List[Dict[str, str]], 
-                           model: str, temperature: float, 
-                           max_tokens: int) -> APIResponse:
+                           model: str, 
+                           max_completion_tokens: int) -> APIResponse:
         """API呼び出し（リトライ付き）"""
         
         # レート制限チェック
@@ -374,8 +369,7 @@ class OpenAIClient:
             response = await self.client.chat.completions.create(
                 model=model,
                 messages=messages,
-                temperature=temperature,
-                max_tokens=max_tokens
+                max_completion_tokens=max_completion_tokens
             )
             
             response_time = time.time() - start_time
@@ -435,8 +429,7 @@ class OpenAIClient:
         return await self._make_api_call(
             messages=messages,
             model=template.model,
-            temperature=template.temperature,
-            max_tokens=template.max_tokens
+            max_completion_tokens=template.max_completion_tokens
         )
     
     async def analyze_with_chunking(self, 
@@ -465,8 +458,7 @@ class OpenAIClient:
                             system_prompt: str,
                             user_prompt: str,
                             model: Optional[str] = None,
-                            temperature: float = 0.3,
-                            max_tokens: int = 4000) -> APIResponse:
+                            max_completion_tokens: int = 4000) -> APIResponse:
         """カスタム分析"""
         
         messages = [
@@ -477,6 +469,5 @@ class OpenAIClient:
         return await self._make_api_call(
             messages=messages,
             model=model or self.default_model,
-            temperature=temperature,
-            max_tokens=max_tokens
+            max_completion_tokens=max_completion_tokens
         )
