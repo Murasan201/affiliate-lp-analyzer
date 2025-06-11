@@ -55,6 +55,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 - 📊 **Rich Visual Output**: Beautiful HTML reports
 - 📁 **One-Click Download**: Instant Markdown report download
 - 🇯🇵 **Japanese Interface**: Beginner-friendly explanations
+- 🛡️ **Enhanced Reliability**: Advanced anti-bot measures and multi-retry system
 
 **Setup Steps:**
 1. **Install Dependencies**: Run setup cells to install required packages
@@ -194,13 +195,24 @@ WAIT_FOR_SELECTOR_TIMEOUT=10000
    python -m playwright install
    ```
 
-2. **OpenAI API rate limit errors**
+2. **Website access blocked or 403 errors**
+   - The tool now includes advanced anti-bot detection measures
+   - Automatic retry with different user agents and headers
+   - 3-tier fallback strategy handles most blocking scenarios
+   - If issues persist, check if the target website has specific access restrictions
+
+3. **OpenAI API rate limit errors**
    - Adjust rate limiting settings in `.env` file
    - Reduce concurrent execution (`--max-concurrent` option)
 
-3. **Memory issues**
+4. **Memory issues**
    - Avoid `--batch` option for large URL sets
    - Split processing into smaller chunks
+
+5. **Slow page loading or timeouts**
+   - Extended timeout to 45 seconds for slow-loading pages
+   - Automatic fallback to simpler extraction methods
+   - Human-like behavior simulation may add processing time but improves success rate
 
 ### Log Files
 - Main log: `logs/lp_analyzer_YYYYMMDD.log`
@@ -283,12 +295,15 @@ The system includes pre-built analysis templates for:
 - Intelligent content chunking
 - Efficient DOM parsing
 - Progress persistence for large batches
+- Multi-tier fallback strategy for optimal performance
 
 ### Resource Management
 - Memory-efficient content extraction
 - API rate limiting compliance
-- Automatic error recovery
+- Automatic error recovery with exponential backoff
+- Advanced anti-bot detection avoidance
 - Detailed performance metrics
+- Human-like behavior simulation for stealth browsing
 
 ## Data Privacy & Security
 
@@ -317,6 +332,14 @@ For issues, feature requests, or questions:
 - Review troubleshooting guide
 
 ## Changelog
+
+### Version 1.2.0
+- **Enhanced Web Content Extraction**: Advanced bot detection avoidance with 3-tier fallback strategy
+- **Improved Reliability**: Multi-retry mechanism with exponential backoff for problematic URLs
+- **Anti-Bot Measures**: Random user agents, human-like behavior simulation, and stealth browsing
+- **Extended Timeout Support**: Increased timeout limits for slow-loading pages (45 seconds)
+- **Robust Error Handling**: Comprehensive fallback from Playwright → requests → basic HTTP
+- **Better Success Rate**: Verified successful extraction of previously failing landing pages
 
 ### Version 1.1.0
 - **OpenAI o4-mini Model Support**: Full compatibility with o4-mini reasoning model
